@@ -9,26 +9,32 @@ class Demo1 extends AdventureScene {
     }
 
     onEnter() {
-
-        
-
+        // Water Image
         let water = this.add.image(this.w * .25, this.w*.51, 'water')
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("The water looks nice doesn't it?")
             })
+            .on('pointerdown', () => {
+                this.showMessage("Woah what a big wave")
+                let wave = this.add.text(this.w * .5, this.w * .4, "🌊")
+                .setFontSize(this.s * 10)
+            })
 
+
+        // Boat image
         let boat = this.add.image(this.w * .2, this.w * .45, 'boat')
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("Where should we go?")
             })
+        
 
-        let key = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
-            .setFontSize(this.s * 2)
+        let island1 = this.add.text(this.w * 0.3, this.w * 0.2, "🏝️ Island 1")
+            .setFontSize(this.s * 5)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("It's a nice key.")
+                this.showMessage("Should we go to this island?")
             })
             .on('pointerdown', () => {
                 this.showMessage("You pick up the key.");
@@ -42,23 +48,18 @@ class Demo1 extends AdventureScene {
                 });
             })
 
-        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 locked door")
-            .setFontSize(this.s * 2)
+        let island2 = this.add.text(this.w * 0.05, this.w * 0.1, "🏖️ Island 2")
+            .setFontSize(this.s * 5)
             .setInteractive()
             .on('pointerover', () => {
-                if (this.hasItem("key")) {
-                    this.showMessage("You've got the key for this door.");
-                } else {
-                    this.showMessage("It's locked. Can you find a key?");
-                }
+                this.showMessage("Should we go to this Island?");
             })
+
+            
             .on('pointerdown', () => {
-                if (this.hasItem("key")) {
-                    this.loseItem("key");
-                    this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
-                    this.gotoScene('demo2');
-                }
+                this.showMessage("*WHOOOOShhhh*");
+                this.gotoScene('demo2');
+                
             })
 
     }
