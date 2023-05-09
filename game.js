@@ -3,23 +3,26 @@ class Demo1 extends AdventureScene {
         super("demo1", "First Room");
     }
 
+    preload (){
+        this.load.image('boat', 'assets/boat.png');
+        this.load.image('water', 'assets/water.png');
+    }
+
     onEnter() {
 
-        let clip = this.add.text(this.w * 0.3, this.w * 0.3, "📎 paperclip")
-            .setFontSize(this.s * 2)
+        
+
+        let water = this.add.image(this.w * .25, this.w*.51, 'water')
             .setInteractive()
-            .on('pointerover', () => this.showMessage("Metal, bent."))
-            .on('pointerdown', () => {
-                this.showMessage("No touching!");
-                this.tweens.add({
-                    targets: clip,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+            .on('pointerover', () => {
+                this.showMessage("The water looks nice doesn't it?")
+            })
+
+        let boat = this.add.image(this.w * .2, this.w * .45, 'boat')
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("Where should we go?")
+            })
 
         let key = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
             .setFontSize(this.s * 2)
