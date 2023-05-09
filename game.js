@@ -1,6 +1,6 @@
 class Scene1 extends AdventureScene {
     constructor() {
-        super("Scene1", "First Room");
+        super("Scene1", "The Open Sea...");
     }
 
     preload (){
@@ -29,7 +29,7 @@ class Scene1 extends AdventureScene {
                 this.showMessage("Where should we go?")
             })
         
-
+        // Island1 and the good ending Island because of treasure
         let island1 = this.add.text(this.w * 0.3, this.w * 0.2, "🏝️ Island 1")
             .setFontSize(this.s * 5)
             .setInteractive()
@@ -37,37 +37,31 @@ class Scene1 extends AdventureScene {
                 this.showMessage("Should we go to this island?")
             })
             .on('pointerdown', () => {
-                this.showMessage("You pick up the key.");
-                this.gainItem('key');
-                this.tweens.add({
-                    targets: key,
-                    y: `-=${2 * this.s}`,
-                    alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => key.destroy()
-                });
+                this.showMessage("WOOOShhhH");
+                this.gotoScene('island1')
+
             })
 
         let island2 = this.add.text(this.w * 0.05, this.w * 0.1, "🏖️ Island 2")
             .setFontSize(this.s * 5)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("Should we go to this Island?");
+                this.showMessage("Should we go to this island?");
             })
 
             
             .on('pointerdown', () => {
                 this.showMessage("*WHOOOOShhhh*");
-                this.gotoScene('demo2');
+                this.gotoScene('island2');
                 
             })
 
     }
 }
 
-class Demo2 extends AdventureScene {
+class Island2 extends AdventureScene {
     constructor() {
-        super("demo2", "The second room has a long name (it truly does).");
+        super("island2", "Island2");
     }
     onEnter() {
         this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
@@ -129,7 +123,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Demo2, Outro],
+    scene: [Intro, Scene1, Island2, Outro],
     title: "Adventure Game",
 });
 
