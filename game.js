@@ -71,7 +71,107 @@ class Island1 extends AdventureScene {
     constructor() {
         super("island1", "Island1")
     }
+    
+    preload() {
+        this.load.image('sand', 'assets/sand.jpg');
+    }
 
+    onEnter() {
+
+        this.add.image(this.w * .281, this.w * .3, 'sand')
+
+        // Go to boat
+        let leave = this.add.text(this.w*.55, this.w*.02, "Go to Boat")
+            .setFontSize(this.s*3)
+            .setInteractive()
+            // Mouse is over show some text
+            .on('pointerover', () => {
+                this.showMessage("Want to go back to the boat?")
+            })
+            .on('pointerdown', () => {
+                if(this.hasItem('gold')) {
+                    this.showMessage("Lets Gooooooo")
+                    this.gotoScene('goodEnding')
+                } else{
+                    this.showMessage("We can't leave yet!")
+                }
+            })
+        
+        let key = this.add.text(this.w*.21,this.w*.4,"🔑")
+            .setFontSize(this.s*2)
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.showMessage('*Grabbed the key*')
+                this.fadeItem(key)
+                this.gainItem('key')
+            })
+
+
+        let rock = this.add.text(this.w*.2, this.w*.4,"🪨")
+            .setFontSize(this.s*4)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("I wonder what is under this rock?")
+            })
+            .on('pointerdown', () => {
+                this.fadeItem(rock)
+                this.showMessage("Oh look its a key!")
+
+            })
+
+
+
+        // Palm tree interaction
+        let pTree = this.add.text(this.w*.6, this.w *.2, "🌴")
+            .setFontSize(this.s*9)
+            .setInteractive()
+            // Mouse is over show some text
+            .on('pointerover', () => {
+                this.showMessage("What a nice tree I wonder if it has any fruit?")
+            })
+            .on('pointerdown', () => {
+                this.gainItem('coconut');
+            })
+
+        
+
+        let x = this.add.text(this.w*.1, this.w*.2, "❌")
+            .setFontSize(this.s*9)
+            .setInteractive()
+            .on('pointover', () => {
+                this.showMessage("What a conviniently place X on the sand.")
+            })
+            .on('pointerdown', () => {
+                this.fadeItem(x)
+                this.showMessage('OH look its some treasure!!!!')
+                let gold = this.add.text(this.w*.1, this.w*.2, "⭐️")
+                    .setFontSize(this.s*9)
+                    .setInteractive()
+                    .on('pointerdown', () => {
+                        this.fadeItem(gold)
+                        this.showMessage("You got the gold!!")
+                        this.gainItem('gold')
+                    })
+
+
+                let lock = this.add.text(this.w*.1, this.w*.2, "🔒")
+                    .setFontSize(this.s*9)
+                    .setInteractive()
+                    .on('pointerover', () => {
+                        if(this.hasItem('key')) {
+                            this.showMessage("Unlock the lock")
+                        } else{
+                            this.showMessage("We need a key")
+                        }
+                    })
+                    .on('pointerdown', () => {
+                        this.fadeItem(lock)
+                        this.loseItem('key')
+                    })
+
+            })
+
+    }
 
 }
 
