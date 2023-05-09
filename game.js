@@ -1,8 +1,11 @@
+
+// Scene 1(The Open Sea... )
 class Scene1 extends AdventureScene {
     constructor() {
         super("Scene1", "The Open Sea...");
     }
 
+    // Some assets preloaded instead of text 
     preload (){
         this.load.image('boat', 'assets/boat.png');
         this.load.image('water', 'assets/water.png');
@@ -12,9 +15,11 @@ class Scene1 extends AdventureScene {
         // Water Image
         let water = this.add.image(this.w * .25, this.w*.51, 'water')
             .setInteractive()
+            // Mouse is over show text
             .on('pointerover', () => {
                 this.showMessage("The water looks nice doesn't it?")
             })
+            // Mouse is down add a wave
             .on('pointerdown', () => {
                 this.showMessage("Woah what a big wave")
                 let wave = this.add.text(this.w * .5, this.w * .4, "🌊")
@@ -25,6 +30,7 @@ class Scene1 extends AdventureScene {
         // Boat image
         let boat = this.add.image(this.w * .2, this.w * .45, 'boat')
             .setInteractive()
+            // Mouse is over show text
             .on('pointerover', () => {
                 this.showMessage("Where should we go?")
             })
@@ -33,23 +39,25 @@ class Scene1 extends AdventureScene {
         let island1 = this.add.text(this.w * 0.3, this.w * 0.2, "🏝️ Island 1")
             .setFontSize(this.s * 5)
             .setInteractive()
+            // Mouse is over show some text
             .on('pointerover', () => {
                 this.showMessage("Should we go to this island?")
             })
+            // Mouse is over go to next scene(island1)
             .on('pointerdown', () => {
                 this.showMessage("WOOOShhhH");
                 this.gotoScene('island1')
 
             })
-
+        // Island2 and the bad ending because no treasure
         let island2 = this.add.text(this.w * 0.05, this.w * 0.1, "🏖️ Island 2")
             .setFontSize(this.s * 5)
             .setInteractive()
+            // Mouse is over show some text
             .on('pointerover', () => {
                 this.showMessage("Should we go to this island?");
             })
-
-            
+            // Mouse is down go to next scene
             .on('pointerdown', () => {
                 this.showMessage("*WHOOOOShhhh*");
                 this.gotoScene('island2');
@@ -57,6 +65,14 @@ class Scene1 extends AdventureScene {
             })
 
     }
+}
+
+class Island1 extends AdventureScene {
+    constructor() {
+        super("island1", "Island1")
+    }
+
+
 }
 
 class Island2 extends AdventureScene {
@@ -123,7 +139,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Island2, Outro],
+    scene: [Intro, Scene1, Island1, Island2, Outro],
     title: "Adventure Game",
 });
 
