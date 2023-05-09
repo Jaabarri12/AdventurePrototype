@@ -1,6 +1,6 @@
-class Demo1 extends AdventureScene {
+class Scene1 extends AdventureScene {
     constructor() {
-        super("demo1", "First Room");
+        super("Scene1", "First Room");
     }
 
     preload (){
@@ -77,7 +77,7 @@ class Demo2 extends AdventureScene {
                 this.showMessage("You've got no other choice, really.");
             })
             .on('pointerdown', () => {
-                this.gotoScene('demo1');
+                this.gotoScene('Scene1');
             });
 
         let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
@@ -105,7 +105,7 @@ class Intro extends Phaser.Scene {
         this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('demo1'));
+            this.time.delayedCall(1000, () => this.scene.start('Scene1'));
         });
     }
 }
@@ -129,7 +129,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Demo1, Demo2, Outro],
+    scene: [Intro, Scene1, Demo2, Outro],
     title: "Adventure Game",
 });
 
