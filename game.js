@@ -91,8 +91,9 @@ class Island1 extends AdventureScene {
             .on('pointerdown', () => {
                 if(this.hasItem('gold')) {
                     this.showMessage("Lets Gooooooo")
-                    this.gotoScene('goodEnding')
+                    this.gotoScene('boat')
                 } else{
+                    this.shake(leave)
                     this.showMessage("We can't leave yet!")
                 }
             })
@@ -165,8 +166,13 @@ class Island1 extends AdventureScene {
                         }
                     })
                     .on('pointerdown', () => {
-                        this.fadeItem(lock)
-                        this.loseItem('key')
+                        if(this.hasItem('key')) {
+                            this.fadeItem(lock)
+                            this.loseItem('key')
+                        } else {
+                            this.shake(lock)
+                        }
+
                     })
 
             })
@@ -174,6 +180,65 @@ class Island1 extends AdventureScene {
     }
 
 }
+
+
+
+
+//Boat Scene(Back on Boat)
+class boat extends AdventureScene {
+    constructor() {
+        super("boat", "Back on the Boat");
+    }
+
+    // Some assets preloaded instead of text 
+    preload (){
+        this.load.image('boat', 'assets/boat.png');
+        this.load.image('water', 'assets/water.png');
+    }
+
+    onEnter() {
+        // Water Image
+        let water = this.add.image(this.w * .25, this.w*.51, 'water')
+            .setInteractive()
+            // Mouse is over show text
+            .on('pointerover', () => {
+                this.showMessage("The water looks nice doesn't it?")
+            })
+            // Mouse is down add a wave
+            .on('pointerdown', () => {
+                this.showMessage("Woah what a big wave")
+                let wave = this.add.text(this.w * .5, this.w * .4, "🌊")
+                .setFontSize(this.s * 10)
+            })
+
+
+        // Boat image
+        let boat = this.add.image(this.w * .2, this.w * .45, 'boat')
+            .setInteractive()
+            // Mouse is over show text
+            .on('pointerover', () => {
+                this.showMessage("Where should we go?")
+            })
+        
+        let home = this.add.text(this.w*.2, this.w*.45, '🏡 Home')
+        .setFontSize(this.s * 2)
+        .setInteractive()
+        .on('pointerover', () => {
+            this.showMessage("Lets go HOMMEEEEE!!!!")
+        })
+        .on('pointerdown', () => {
+            this.showMessage("Away we gooooo")
+            this.gotoScene('goodEnding')
+        })
+
+
+    }
+}
+
+
+
+
+
 
 class Island2 extends AdventureScene {
     constructor() {
@@ -251,7 +316,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Island1, Island2, Outro],
+    scene: [Intro, Scene1, Island1, boat, Island2, Outro],
     title: "Adventure Game",
 });
 
