@@ -210,7 +210,19 @@ class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
     }
+
+    preload() {
+        this.load.image('pirate', 'assets/pirate.png');
+        this.load.audio('introMusic', 'assets/introMusic.mp3');
+    }
+
     create() {
+
+        let sound = this.sound.add('introMusic')
+        sound.loop = true;
+        sound.play()
+        this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'pirate');
+
         this.add.text(50,50, "Adventure awaits!").setFontSize(50);
         this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
