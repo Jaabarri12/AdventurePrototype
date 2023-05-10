@@ -244,30 +244,52 @@ class Island2 extends AdventureScene {
     constructor() {
         super("island2", "Island2");
     }
+
+    preload() {
+        this.load.image('niceIsland', 'assets/island2.jpg')
+    }
+
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
-            .setFontSize(this.s * 2)
+
+        this.add.image(this.w*.281, this.h*.5,'niceIsland')
+
+        let monkey = this.add.text((this.w/2)*.2, (this.h/2)-200,'🐵')
+            .setFontSize(this.s*7)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
+                this.showMessage("Hi my name is Jerron")
             })
             .on('pointerdown', () => {
-                this.gotoScene('Scene1');
-            });
+                this.showMessage("Take my favorite banana")
+                this.gainItem('banana')
+            })
 
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+        let mountain = this.add.text(this.w/2, this.h/2*.4, '⛰️')
+            .setFontSize(this.s*25)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage('*giggles*');
-                this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
-                });
+                this.showMessage("What a nice Mountain")
             })
-            .on('pointerdown', () => this.gotoScene('outro'));
+            .on('pointerdown', () => {
+                this.showMessage("Lets Check it out")
+                this.gotoScene("cave")
+            })
+        let snake = this.add.text((this.w/2)*.1, (this.h/2)*1.3, '🐍')
+            .setFontSize(this.s*5)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage('You should go check out the Cave in the mountain')
+            })
+            .on('pointerdown', () => {
+                this.showMessage("DONT TOUCH ME")
+                this.shake(snake)
+            })
+        
+
+        
+
+
+
     }
 }
 
