@@ -393,7 +393,7 @@ class BadEnding extends Phaser.Scene {
     
         this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'ending2')
 
-        this.add.text(50, 50, "You have Died").setFontSize(50);
+        this.add.text(50, 50, "You have Die...").setFontSize(50);
 
     }
 }
