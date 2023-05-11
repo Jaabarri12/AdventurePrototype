@@ -385,15 +385,15 @@ class BadEnding extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('ending1', 'assets/goodEnd.png');
+        this.load.image('ending2', 'assets/grave.png');
     }
 
     create() {
   
     
-        this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'ending1')
+        this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'ending2')
 
-        this.add.text(50, 50, "That's all!").setFontSize(50);
+        this.add.text(50, 50, "You have Died").setFontSize(50);
 
     }
 }
