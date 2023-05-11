@@ -67,6 +67,7 @@ class Scene1 extends AdventureScene {
     }
 }
 
+// This is the First Island
 class Island1 extends AdventureScene {
     constructor() {
         super("island1", "Island1")
@@ -217,11 +218,11 @@ class boat extends AdventureScene {
             .setInteractive()
             // Mouse is over show text
             .on('pointerover', () => {
-                this.showMessage("Where should we go?")
+                this.showMessage("Lets Head home we got some gold")
             })
         
-        let home = this.add.text(this.w*.2, this.w*.45, '🏡 Home')
-        .setFontSize(this.s * 2)
+        let home = this.add.text((this.w/2)-500, (this.h/2)-400, '🏡 Home')
+        .setFontSize(this.s * 10)
         .setInteractive()
         .on('pointerover', () => {
             this.showMessage("Lets go HOMMEEEEE!!!!")
@@ -234,6 +235,8 @@ class boat extends AdventureScene {
 
     }
 }
+
+
 
 
 
@@ -293,6 +296,44 @@ class Island2 extends AdventureScene {
     }
 }
 
+
+
+class Cave extends AdventureScene {
+    constructor() {
+        super("cave", "Cave")
+    }
+
+    preload() {
+        this.load.image('monster', 'assets/creature.png');
+        this.load.image('black', 'assets/blackB.png');
+    }
+
+    onEnter() {
+
+        let black = this.add.image(this.w*.27, this.w * .3, 'black');
+
+        let torch = this.add.text(this.w/2, this.h/2+200, "🪵")
+            .setFontSize(this.s*5)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage('It is really dark, Lets light a fire')
+            })
+            .on('pointerdown', () => {
+                this.fadeItem(torch)
+                let fire = this.add.text(this.w/2, this.h/2+200, "🔥")
+                    .setFontSize(this.s*7)
+                    .setInteractive()
+                let creature = this.add.image(this.w/2, this.h/2, 'monster')
+                this.showMessage('RUNNNNN')
+                this.time.delayedCall(1000, () => this.gotoScene('badEnding'))
+            })
+
+    }
+
+}
+
+
+
 class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
@@ -319,14 +360,22 @@ class Intro extends Phaser.Scene {
     }
 }
 
-class Outro extends Phaser.Scene {
+class GoodEnding extends Phaser.Scene {
     constructor() {
-        super('outro');
+        super('goodEnding');
     }
+
+    preload () {
+        this.load.image('ending1', 'assets/goodEnd.png');
+    }
+
     create() {
+  
+    
+        this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'ending1')
+
         this.add.text(50, 50, "That's all!").setFontSize(50);
-        this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
-        this.input.on('pointerdown', () => this.scene.start('intro'));
+
     }
 }
 
@@ -338,7 +387,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Island1, boat, Island2, Outro],
+    scene: [Intro, Scene1, Island1, boat, Island2, Cave, GoodEnding],
     title: "Adventure Game",
 });
 
