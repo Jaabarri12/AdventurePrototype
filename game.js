@@ -379,6 +379,25 @@ class GoodEnding extends Phaser.Scene {
     }
 }
 
+class BadEnding extends Phaser.Scene {
+    constructor() {
+        super('badEnding');
+    }
+
+    preload () {
+        this.load.image('ending1', 'assets/goodEnd.png');
+    }
+
+    create() {
+  
+    
+        this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2 , 'ending1')
+
+        this.add.text(50, 50, "That's all!").setFontSize(50);
+
+    }
+}
+
 
 const game = new Phaser.Game({
     scale: {
@@ -387,7 +406,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Scene1, Island1, boat, Island2, Cave, GoodEnding],
+    scene: [Intro, Scene1, Island1, boat, Island2, Cave, GoodEnding, BadEnding],
     title: "Adventure Game",
 });
 
